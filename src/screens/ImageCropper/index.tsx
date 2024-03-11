@@ -7,8 +7,7 @@ import RNFS from 'react-native-fs';
 const ImageCropper = () => {
   const [selectedImage, setSelectedImage] = useState<string>();
 
-  const confirmVideo = () => {
-    console.log('innnnnnnnn');
+  const OpenCamera = () => {
     ImagePicker.openCamera({
       cropping: true,
       freeStyleCropEnabled: true,
@@ -60,7 +59,7 @@ const ImageCropper = () => {
           <Button title="Download" onPress={handleDownload} />
         </View>
       )}
-      <Button title="Camera" onPress={confirmVideo} />
+      <Button title="Camera" onPress={OpenCamera} />
     </View>
   );
 };

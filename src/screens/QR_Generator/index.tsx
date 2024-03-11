@@ -4,8 +4,6 @@ import QRCode from 'react-native-qrcode-svg';
 
 const QRGen = () => {
     const [data,setData] = useState("Create QR code");
-    if(data){
-    }
   return (
     <View style={styles.container}>
       <QRCode
@@ -18,7 +16,7 @@ const QRGen = () => {
       placeholder='Enter data here'
       onChangeText={(text)=>{
         if(text.length==0){
-            setData("Enter data here")
+            setData("Enter data")
         }else{
         setData(text)
         }

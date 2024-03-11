@@ -5,6 +5,7 @@ import QRscan from './screens/QR';
 import DashBoard from './screens/DashBD';
 import QRGen from './screens/QR_Generator';
 import ImageCropper from './screens/ImageCropper';
+import Camera from './screens/Camera';
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
@@ -13,6 +14,7 @@ export type RootStackParamList = {
   QRscan: undefined;
   QRGen:undefined;
   ImageCropper:undefined;
+  Camera:undefined;
 };
 
 const App = () => {
@@ -38,6 +40,11 @@ const App = () => {
       <Stack.Screen
         name="ImageCropper"
         component={ImageCropper}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Camera"
+        component={Camera}
         options={{headerShown: false}}
       />
       </Stack.Navigator>
