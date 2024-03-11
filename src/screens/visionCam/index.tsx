@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { Camera, useCameraDevice } from "react-native-vision-camera";
+import { Camera, Templates, useCameraDevice, useCameraFormat } from "react-native-vision-camera";
 
 function VisionCam() {
     const [showCamera, setShowCamera] = useState(true);
@@ -9,16 +9,9 @@ function VisionCam() {
     const devices = useCameraDevice("back")
     const camera = useRef<Camera>(null);
   
-    useEffect(() => {
-      async function getPermission() {
-        const newCameraPermission = await Camera.requestCameraPermission();
-        console.log("permission status: ", newCameraPermission);
-
-        };
-      getPermission();
-    }, []);
+    
   
-    const capturePhoto = async () => {
+    const takePhoto = async () => {
       if (camera.current !== null) {
         const photo = await camera.current.takePhoto();
         setImageSource(photo.path);
@@ -31,7 +24,16 @@ function VisionCam() {
       setShowCamera(true);
       setImageSource('');
     };
-  
+    
+    useEffect(() => {
+      const getPermission= async()=> {
+        const newCameraPermission = await Camera.requestCameraPermission();
+        console.log("permission status: ", newCameraPermission);
+
+        };
+      getPermission();
+    }, []);
+
     if (devices == null) {
       return <Text>Camera not available</Text>;
     }
@@ -47,11 +49,12 @@ function VisionCam() {
               device={devices}
               isActive={showCamera}
               photo={true}
+              format={useCameraFormat(devices,Templates.Instagram)}
             />
             <View style={styles.buttonCon}>
               <TouchableOpacity
                 style={styles.camButton}
-                onPress={() => capturePhoto()}
+                onPress={() => takePhoto()}
               />
             </View>
           </>
