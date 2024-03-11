@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Image, Linking, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Camera, useCameraDevice } from "react-native-vision-camera";
 
 function VisionCam() {
