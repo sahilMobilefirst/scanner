@@ -6,6 +6,7 @@ import DashBoard from './screens/DashBD';
 import QRGen from './screens/QR_Generator';
 import ImageCropper from './screens/ImageCropper';
 import Camera from './screens/Camera';
+import VisionCam from './screens/visionCam';
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
@@ -15,6 +16,7 @@ export type RootStackParamList = {
   QRGen:undefined;
   ImageCropper:undefined;
   Camera:undefined;
+  VisionCam:undefined;
 };
 
 const App = () => {
@@ -45,6 +47,11 @@ const App = () => {
       <Stack.Screen
         name="Camera"
         component={Camera}
+        options={{headerShown: false}}
+      />
+       <Stack.Screen
+        name="VisionCam"
+        component={VisionCam}
         options={{headerShown: false}}
       />
       </Stack.Navigator>

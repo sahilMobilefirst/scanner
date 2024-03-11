@@ -28,6 +28,11 @@ const DashBoard = ({navigation}:DashBoardProps) => {
       style={styles.btn}>
         <Text style={styles.btnText}>Camera</Text>
       </Pressable>
+      <Pressable
+      onPress={()=>{navigation.navigate("VisionCam")}}
+      style={styles.btn}>
+        <Text style={styles.btnText}>Vision Camera</Text>
+      </Pressable>
     </View>
   )
 }

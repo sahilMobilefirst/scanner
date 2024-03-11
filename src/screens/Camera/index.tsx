@@ -24,6 +24,7 @@ const Camera = () => {
       <RNCamera
         ref={(ref) => {
           cameraRef.current = ref;
+
         }}
         style={styles.camera}
         type={RNCamera.Constants.Type.back}
