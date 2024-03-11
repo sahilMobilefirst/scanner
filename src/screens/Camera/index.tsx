@@ -2,17 +2,17 @@ import React, { useRef, useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 
-
 const Camera = () => {
   const cameraRef = useRef<RNCamera | null>(null);
-    const [data,setData] = useState<string>()
+  const [data, setData] = useState<string>();
+
   const handleCamera = async () => {
     if (cameraRef.current) {
       try {
         const options = { quality: 0.5, base64: true };
-        const data = await cameraRef.current.takePictureAsync(options);
-        setData(data.uri)
-        console.log(data.uri);
+        const imageData = await cameraRef.current.takePictureAsync(options);
+        setData(imageData.uri);
+        console.log(imageData.uri);
       } catch (error) {
         console.error('Error taking picture:', error);
       }
@@ -33,6 +33,7 @@ const Camera = () => {
         <TouchableOpacity style={styles.capture} onPress={handleCamera}>
           <Text style={styles.captureButtonText}>CAPTURE</Text>
         </TouchableOpacity>
+        
       </View>
     </View>
   );
@@ -55,14 +56,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     position: 'absolute',
     bottom: 20,
-    alignItems:"center"
+    alignItems: 'center', 
+    width: '100%', 
   },
   capture: {
     backgroundColor: 'white',
     borderRadius: 5,
     padding: 15,
     paddingHorizontal: 20,
-    alignItems:"center"
+    alignItems: 'center',
   },
   captureButtonText: {
     fontSize: 16,

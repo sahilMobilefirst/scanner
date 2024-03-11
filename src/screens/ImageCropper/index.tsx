@@ -7,15 +7,29 @@ import RNFS from 'react-native-fs';
 const ImageCropper = () => {
   const [selectedImage, setSelectedImage] = useState<string>();
 
+  const OpenPicker = () => {
+    ImagePicker.openPicker({
+      cropping: true,
+      mediaType: 'photo',
+    })
+      .then((image) => {
+          console.log(image);
+          setSelectedImage(image.path);
+      })
+      .catch((error) => console.log('Error selecting image:', error));
+  };
+
   const OpenCamera = () => {
     ImagePicker.openCamera({
       cropping: true,
       freeStyleCropEnabled: true,
       mediaType: 'photo',
-    }).then((image) => {
-      console.log(image);
-      setSelectedImage(image.path);
-    });
+    })
+      .then((image) => {
+          console.log(image);
+          setSelectedImage(image.path);
+      })
+      .catch((error) => console.log('Error taking photo:', error));
   };
 
   const handleDownload = async () => {
@@ -27,7 +41,7 @@ const ImageCropper = () => {
           const fileName = 'image.jpg';
           const localImagePath = `${downloadDir}/${fileName}`;
           await RNFS.copyFile(selectedImage, localImagePath);
-          console.log('downloaded successfully:', localImagePath);
+          console.log('Downloaded successfully:', localImagePath);
         } else {
           console.log('Permission denied');
         }
@@ -36,7 +50,6 @@ const ImageCropper = () => {
       }
     }
   };
-
 
   const requestStoragePermission = async () => {
     try {
@@ -50,16 +63,18 @@ const ImageCropper = () => {
       console.error(error);
       return RESULTS.DENIED;
     }
-  }
+  };
+
   return (
     <View style={styles.container}>
       {selectedImage && (
-        <View style={{flexDirection:"column"}}>
+        <View style={{ flexDirection: 'column' }}>
           <Image source={{ uri: selectedImage }} style={styles.image} />
           <Button title="Download" onPress={handleDownload} />
         </View>
       )}
-      <Button title="Camera" onPress={OpenCamera} />
+      <Button title="Open Camera" onPress={OpenCamera} />
+      <Button title="Open Picker" onPress={OpenPicker} />
     </View>
   );
 };
@@ -69,11 +84,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    gap:17
+    gap: 17,
   },
   image: {
-    width: Dimensions.get("window").width*0.8,
-    height: Dimensions.get("window").height*0.5,
+    width: Dimensions.get('window').width * 0.8,
+    height: Dimensions.get('window').height * 0.5,
     marginVertical: 20,
   },
 });
