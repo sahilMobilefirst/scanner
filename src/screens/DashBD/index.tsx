@@ -3,13 +3,20 @@ import React from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../App';
 import { Camera } from 'react-native-vision-camera';
+import { RESULTS } from 'react-native-permissions';
 
 type DashBoardProps =NativeStackScreenProps<RootStackParamList,"DashBoard">;
 
 const DashBoard = ({navigation}:DashBoardProps) => {
-  const getPermission= async()=> {
-    const newCameraPermission = await Camera.requestCameraPermission();
-    console.log("permission status: ", newCameraPermission)}
+
+    const VP =async () => {
+        const newCameraPermission = await Camera.requestCameraPermission();
+        if(newCameraPermission===RESULTS.GRANTED){
+          navigation.navigate("VisionCam")
+        }else {
+          console.log('Permission denied');
+        }
+    }
   return (
     <View style={styles.container}>
       <Pressable
@@ -33,9 +40,7 @@ const DashBoard = ({navigation}:DashBoardProps) => {
         <Text style={styles.btnText}>Camera</Text>
       </Pressable>
       <Pressable
-      onPress={()=>{
-      getPermission()
-      navigation.navigate("VisionCam")}}
+      onPress={VP}
       style={styles.btn}>
         <Text style={styles.btnText}>Vision Camera</Text>
       </Pressable>
