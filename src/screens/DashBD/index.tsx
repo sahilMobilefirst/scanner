@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../App';
 import { Camera } from 'react-native-vision-camera';
@@ -9,10 +9,12 @@ type DashBoardProps =NativeStackScreenProps<RootStackParamList,"DashBoard">;
 
 const DashBoard = ({navigation}:DashBoardProps) => {
 
-    const VP =async () => {
+    const VP =async (screen:string) => {
+        console.log(screen);
         const newCameraPermission = await Camera.requestCameraPermission();
         if(newCameraPermission===RESULTS.GRANTED){
-          navigation.navigate("VisionCam")
+          // @ts-ignore
+          navigation.navigate(screen)
         }else {
           console.log('Permission denied');
         }
@@ -40,9 +42,19 @@ const DashBoard = ({navigation}:DashBoardProps) => {
         <Text style={styles.btnText}>Camera</Text>
       </Pressable>
       <Pressable
-      onPress={VP}
+      onPress={()=>{VP("VisionCam")}}
       style={styles.btn}>
         <Text style={styles.btnText}>Vision Camera</Text>
+      </Pressable>
+      <Pressable
+      onPress={()=>navigation.navigate("Webview")}
+      style={styles.btn}>
+        <Text style={styles.btnText}>Webv View</Text>
+      </Pressable>
+      <Pressable
+      onPress={()=>VP("Torch")}
+      style={styles.btn}>
+        <Text style={styles.btnText}>Torch</Text>
       </Pressable>
     </View>
   )

@@ -7,6 +7,9 @@ import QRGen from './screens/QR_Generator';
 import ImageCropper from './screens/ImageCropper';
 import Camera from './screens/Camera';
 import VisionCam from './screens/visionCam';
+import Webview from './screens/WebView';
+import Torch from './screens/Torch';
+import TorchScreen from './screens/Torch';
 
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
@@ -18,6 +21,8 @@ export type RootStackParamList = {
   ImageCropper:undefined;
   Camera:undefined;
   VisionCam:undefined;
+  Webview:undefined;
+  Torch:undefined
 };
 
 const App = () => {
@@ -55,6 +60,17 @@ const App = () => {
         component={VisionCam}
         options={{headerShown: false}}
       />
+       <Stack.Screen
+        name="Webview"
+        component={Webview}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Torch"
+        component={TorchScreen}
+        options={{headerShown: false}}
+      />
+      
       </Stack.Navigator>
       </NavigationContainer>
      </SafeAreaView>

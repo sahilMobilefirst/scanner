@@ -5,8 +5,6 @@ import { img1 } from '../../../assets/images';
 
 const QRGen = () => {
     const [data,setData] = useState("Create QR code");
-    console.log(img1);
-    
   return (
     <View style={styles.container}>
       <QRCode
