@@ -1,15 +1,17 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native'
+import { StyleSheet, TextInput, View } from 'react-native'
 import React, { useState } from 'react'
 import QRCode from 'react-native-qrcode-svg';
+import { img1 } from '../../../assets/images';
 
 const QRGen = () => {
     const [data,setData] = useState("Create QR code");
+    console.log(img1);
+    
   return (
     <View style={styles.container}>
       <QRCode
       value={data}
       size={200}
-      
       />
       <TextInput
       style={styles.textbox}
@@ -18,7 +20,7 @@ const QRGen = () => {
         if(text.length==0){
             setData("Enter data")
         }else{
-        setData(text)
+        setData(img1)
         }
         }}
       />

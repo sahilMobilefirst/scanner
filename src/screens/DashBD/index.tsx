@@ -2,10 +2,14 @@ import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../App';
+import { Camera } from 'react-native-vision-camera';
 
 type DashBoardProps =NativeStackScreenProps<RootStackParamList,"DashBoard">;
 
 const DashBoard = ({navigation}:DashBoardProps) => {
+  const getPermission= async()=> {
+    const newCameraPermission = await Camera.requestCameraPermission();
+    console.log("permission status: ", newCameraPermission)}
   return (
     <View style={styles.container}>
       <Pressable
@@ -29,7 +33,9 @@ const DashBoard = ({navigation}:DashBoardProps) => {
         <Text style={styles.btnText}>Camera</Text>
       </Pressable>
       <Pressable
-      onPress={()=>{navigation.navigate("VisionCam")}}
+      onPress={()=>{
+      getPermission()
+      navigation.navigate("VisionCam")}}
       style={styles.btn}>
         <Text style={styles.btnText}>Vision Camera</Text>
       </Pressable>

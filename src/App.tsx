@@ -1,12 +1,13 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
-import QRscan from './screens/QR';
+import QRscan from './screens/QR_Scan';
 import DashBoard from './screens/DashBD';
 import QRGen from './screens/QR_Generator';
 import ImageCropper from './screens/ImageCropper';
 import Camera from './screens/Camera';
 import VisionCam from './screens/visionCam';
+
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
